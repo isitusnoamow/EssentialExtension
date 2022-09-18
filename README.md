@@ -7,3 +7,4 @@
 - Square Brackets
 - Enhanced Deleting
 - 8Ball
+- Enhanced Keyboard Bottom Row
