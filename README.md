@@ -6,3 +6,4 @@
 - Banana
 - Square Brackets
 - Enhanced Deleting
+- 8Ball

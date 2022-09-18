@@ -2,7 +2,7 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 
-const commentType : { [key:string]: string} = {
+const commentType: { [key: string]: string } = {
 	js: '//',
 	py: '#',
 	cpp: '//',
@@ -53,6 +53,30 @@ const brackets = [
 	']'
 ];
 
+const answers = [
+	"It is certain.",
+	"It is decidedly so.",
+	"Without a doubt.",
+	"Yes - definitely.",
+	"You may rely on it.",
+	"As I see it, yes.",
+	"Most likely.",
+	"Outlook good.",
+	"Yes.",
+	"Signs point to yes.",
+	"Reply hazy, try again.",
+	"Ask again later.",
+	"Better not tell you now.",
+	"Cannot predict now.",
+	"Concentrate and ask again.",
+	"Don't count on it.",
+	"My reply is no.",
+	"My sources say no.",
+	"Outlook not so good.",
+	"Very doubtful.",
+	"No, you are an idiot."
+];
+
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
@@ -97,34 +121,44 @@ function reminder() {
 	vscode.commands.executeCommand("type", { text: "\n" });
 	let file = editor.document.fileName.split(".");
 	let fileType = file[file.length - 1];
-	if (lineText.trim().substring(0,commentType[fileType].length) !== commentType[fileType] && lineText.trim() !== '') {
-		let commentText= '';
-		if(Math.floor(Math.random() * 2) === 0){
-			let index = Math.floor(Math.random() * 10);
-			commentText = commentType[fileType] + commentStarts[index] + lineText.trim();
-		}else {
-			let index = Math.floor(Math.random() * 8);
-			commentText = commentType[fileType] + preComments[index] + lineText.trim() + postComments[index];
-		}
+	if (lineText[lineText.length - 1] === '?') {
+
+		let commentText = commentType[fileType] + answers[Math.floor(Math.random() * 21)];
 		vscode.commands.executeCommand("type", { text: commentText });
 		vscode.commands.executeCommand("type", { text: "\n" });
+
+	} else {
+
+		if (lineText.trim().substring(0, commentType[fileType].length) !== commentType[fileType] && lineText.trim() !== '') {
+			let commentText = '';
+			if (Math.floor(Math.random() * 2) === 0) {
+				let index = Math.floor(Math.random() * 10);
+				commentText = commentType[fileType] + commentStarts[index] + lineText.trim();
+			} else {
+				let index = Math.floor(Math.random() * 8);
+				commentText = commentType[fileType] + preComments[index] + lineText.trim() + postComments[index];
+			}
+			vscode.commands.executeCommand("type", { text: commentText });
+			vscode.commands.executeCommand("type", { text: "\n" });
+		}
+
 	}
 }
 
-function banana(direction:string) {
+function banana(direction: string) {
 	const editor = vscode.window.activeTextEditor!;
-	if(Math.floor(Math.random() * 4) === 0){
+	if (Math.floor(Math.random() * 4) === 0) {
 		let index = editor.selection.active.line;
-		let totalLines = editor.document.getText().split(/\r\n|\r|\n/).length;		
-		let movement = Math.floor(Math.random()*totalLines) - index;
+		let totalLines = editor.document.getText().split(/\r\n|\r|\n/).length;
+		let movement = Math.floor(Math.random() * totalLines) - index;
 		console.log(movement);
-		vscode.commands.executeCommand("cursorMove",{to: 'down', by: 'line', value: movement});
+		vscode.commands.executeCommand("cursorMove", { to: 'down', by: 'line', value: movement });
 		let file = editor.document.fileName.split(".");
 		let fileType = file[file.length - 1];
 		let funny = commentType[fileType] + "You slipped on a banana";
 		vscode.commands.executeCommand("type", { text: funny });
-	}else{
-		vscode.commands.executeCommand("cursorMove",{to: direction});
+	} else {
+		vscode.commands.executeCommand("cursorMove", { to: direction });
 	}
 }
 
@@ -135,7 +169,7 @@ function brakeit() {
 function del() {
 	const editor = vscode.window.activeTextEditor!;
 	let deletionAmount = Math.floor(Math.random() * editor.document.getText().length + 1);
-	for(let i = 0; i < deletionAmount; i++){
+	for (let i = 0; i < deletionAmount; i++) {
 		vscode.commands.executeCommand("deleteLeft");
 	}
 }
