@@ -45,6 +45,31 @@
       {
         "command": "essentialextension.delete",
         "title": "Helps your brackets"
+      },
+
+      {
+        "command": "essentialextension.reverseZ",
+        "title": "Mirror"
+      },
+      {
+        "command": "essentialextension.reverseX",
+        "title": "Mirror"
+      },
+      {
+        "command": "essentialextension.reverseC",
+        "title": "Mirror"
+      },
+      {
+        "command": "essentialextension.reverseB",
+        "title": "Mirror"
+      },
+      {
+        "command": "essentialextension.reverseN",
+        "title": "Mirror"
+      },
+      {
+        "command": "essentialextension.reverseM",
+        "title": "Mirror"
       }
     ],
     "keybindings": [
@@ -94,6 +119,37 @@
       {
         "command": "essentialextension.delete",
         "key": "backspace",
+        "when": "editorTextFocus"
+      },
+
+      {
+        "command": "essentialextension.reverseZ",
+        "key": "z",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "essentialextension.reverseX",
+        "key": "x",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "essentialextension.reverseC",
+        "key": "c",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "essentialextension.reverseB",
+        "key": "b",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "essentialextension.reverseN",
+        "key": "n",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "essentialextension.reverseM",
+        "key": "m",
         "when": "editorTextFocus"
       }
 

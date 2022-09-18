@@ -6,7 +6,11 @@ const commentType: { [key: string]: string } = {
 	js: '//',
 	py: '#',
 	cpp: '//',
-	ts: '//'
+	ts: '//',
+	java: '//',
+	c: '//',
+	r: '#',
+	cs: '//'
 };
 
 const commentStarts = [
@@ -77,6 +81,15 @@ const answers = [
 	"No, you are an idiot."
 ];
 
+const letterReversal: { [key: string]: string } = {
+	z:'m',
+	x:'n',
+	c:'b',
+	b:'c',
+	n:'x',
+	m:'z'
+};
+
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
@@ -86,9 +99,11 @@ export function activate(context: vscode.ExtensionContext) {
 	const reminderDisp = vscode.commands.registerCommand('essentialextension.reminder', () => {
 		reminder();
 	});
+
 	const bananaUpDisp = vscode.commands.registerCommand('essentialextension.bananaUp', () => {
 		banana("up");
 	});
+
 	const bananaDownDisp = vscode.commands.registerCommand('essentialextension.bananaDown', () => {
 		banana("down");
 	});
@@ -98,11 +113,35 @@ export function activate(context: vscode.ExtensionContext) {
 	const bananaRightDisp = vscode.commands.registerCommand('essentialextension.bananaRight', () => {
 		banana("right");
 	});
+
 	const brakeitDisp = vscode.commands.registerCommand('essentialextension.brakeit', () => {
 		brakeit();
 	});
+
 	const deleteDisp = vscode.commands.registerCommand('essentialextension.delete', () => {
 		del();
+	});
+
+	const reverseZDisp = vscode.commands.registerCommand('essentialextension.reverseZ', () => {
+		reverse('z');
+	});
+	const reverseXDisp = vscode.commands.registerCommand('essentialextension.reverseX', () => {
+		reverse('x');
+	});
+	const reverseCDisp = vscode.commands.registerCommand('essentialextension.reverseC', () => {
+		reverse('c');
+	});
+	const reverseVDisp = vscode.commands.registerCommand('essentialextension.reverseV', () => {
+		reverse('v');
+	});
+	const reverseBDisp = vscode.commands.registerCommand('essentialextension.reverseB', () => {
+		reverse('b');
+	});
+	const reverseNDisp = vscode.commands.registerCommand('essentialextension.reverseN', () => {
+		reverse('n');
+	});
+	const reverseMDisp = vscode.commands.registerCommand('essentialextension.reverseM', () => {
+		reverse('m');
 	});
 
 	context.subscriptions.push(reminderDisp);
@@ -112,6 +151,13 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(bananaRightDisp);
 	context.subscriptions.push(brakeitDisp);
 	context.subscriptions.push(deleteDisp);
+	context.subscriptions.push(reverseZDisp);
+	context.subscriptions.push(reverseXDisp);
+	context.subscriptions.push(reverseCDisp);
+	context.subscriptions.push(reverseVDisp);
+	context.subscriptions.push(reverseBDisp);
+	context.subscriptions.push(reverseNDisp);
+	context.subscriptions.push(reverseMDisp);
 }
 
 function reminder() {
@@ -172,6 +218,10 @@ function del() {
 	for (let i = 0; i < deletionAmount; i++) {
 		vscode.commands.executeCommand("deleteLeft");
 	}
+}
+
+function reverse(letter: string) {
+	vscode.commands.executeCommand("type", {text: letterReversal[letter] });
 }
 
 // this method is called when your extension is deactivated
